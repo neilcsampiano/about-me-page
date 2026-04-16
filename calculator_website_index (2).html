@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #ffffff;
+      color: #000000;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .calculator {
+      display: inline-block;
+      background: #ffffff;
+      padding: 15px;
+      border: 2px solid #000000;
+    }
+
+    #display {
+      width: 100%;
+      height: 40px;
+      font-size: 20px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #000000;
+      background: #ffffff;
+      color: #000000;
+    }
+
+    button {
+      width: 50px;
+      height: 40px;
+      margin: 3px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #000000;
+    }
+
+    button:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Calculator</h2>
+
+  <div class="calculator">
+    <input type="text" id="display" value="0" readonly>
+    <br>
+
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="addOp('/')">/</button>
+    <button onclick="addOp('*')">*</button>
+    <button onclick="addOp('-')">-</button>
+    <br>
+
+    <button onclick="addNum('7')">7</button>
+    <button onclick="addNum('8')">8</button>
+    <button onclick="addNum('9')">9</button>
+    <button onclick="addOp('+')">+</button>
+    <br>
+
+    <button onclick="addNum('4')">4</button>
+    <button onclick="addNum('5')">5</button>
+    <button onclick="addNum('6')">6</button>
+    <br>
+
+    <button onclick="addNum('1')">1</button>
+    <button onclick="addNum('2')">2</button>
+    <button onclick="addNum('3')">3</button>
+    <br>
+
+    <button onclick="addNum('0')">0</button>
+    <button onclick="addNum('.')">.</button>
+    <button onclick="compute()">=</button>
+  </div>
+
+  
+
+  <script>
+    var display = document.getElementById("display");
+
+    function addNum(num) {
+      if (display.value === "0") {
+        display.value = num;
+      } else {
+        display.value += num;
+      }
+    }
+
+    function addOp(op) {
+      var last = display.value[display.value.length - 1];
+      if (last === '+' || last === '-' || last === '*' || last === '/') {
+        display.value = display.value.slice(0, -1) + op;
+      } else {
+        display.value += op;
+      }
+    }
+
+    function clearDisplay() {
+      display.value = "0";
+    }
+
+    function compute() {
+      try {
+        var result = eval(display.value);
+        if (!isFinite(result)) {
+          display.value = "Error";
+        } else {
+          display.value = result;
+        }
+      } catch (e) {
+        display.value = "Error";
+      }
+    }
+  </script>
+
+  
+
+</body>
+</html>
